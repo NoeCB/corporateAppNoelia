@@ -1,13 +1,33 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>nosotros</ion-title>
+    <ion-title>Nosotros</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">nosotros</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Nuestra empresa</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      Empresa especializada en soluciones basadas en Angular, Ionic y Node.js.
+
+      <p>
+        Distancia a nuestras oficinas:
+        {{ distancia }} km
+      </p>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="block" (click)="obtenerPosicion()" [disabled]="cargando">
+    <ion-spinner *ngIf="cargando" name="crescent"></ion-spinner>
+    <span *ngIf="!cargando">Obtener mi posición</span>
+  </ion-button>
+
+  <div *ngIf="error" style="color: red; margin-top: 10px; text-align: center;">
+    {{ error }}
+  </div>
+
 </ion-content>

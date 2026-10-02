@@ -1,3 +1,5 @@
+import { Routes } from '@angular/router';
+
 export const routes: Routes = [
   {
     path: '',
@@ -6,8 +8,7 @@ export const routes: Routes = [
   },
   {
     path: 'home',
-    // Apunta a ./home/ porque está dentro de app/home/
-    loadComponent: () => import('./home/home.page').then(m => m.HomePage),
+    loadComponent: () => import('./pages/home/home.page').then(m => m.HomePage),
   },
   {
     path: 'productos',
@@ -20,13 +21,5 @@ export const routes: Routes = [
   {
     path: 'contacto',
     loadComponent: () => import('./pages/contacto/contacto.page').then(m => m.ContactoPage),
-  },
-  {
-    path: 'contacto',
-    loadComponent: () => import('./pages/contacto/contacto.page').then( m => m.ContactoPage)
-  },
-  {
-    path: 'models',
-    loadComponent: () => import('./app/models/models.page').then( m => m.ModelsPage)
   },
 ];

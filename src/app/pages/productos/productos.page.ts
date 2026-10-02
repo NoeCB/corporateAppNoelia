@@ -1,19 +1,38 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar } from '@ionic/angular';
+import {
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonButtons,
+  IonBackButton,
+  IonContent,
+  IonGrid,
+  IonRow,
+  IonCol
+} from '@ionic/angular';
+import { ProductsService } from '../../services/products.service';
 
 @Component({
+  standalone: true,
   selector: 'app-productos',
   templateUrl: './productos.page.html',
   styleUrls: ['./productos.page.scss'],
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, CommonModule, FormsModule]
+  imports: [
+    CommonModule,
+    IonHeader, IonToolbar, IonTitle,
+    IonButtons, IonBackButton,
+    IonContent, IonGrid, IonRow, IonCol
+  ]
 })
 export class ProductosPage implements OnInit {
 
-  constructor() { }
+  products: any[] = [];
 
-  ngOnInit() {
+  constructor(private productService: ProductsService) {}
+
+  async ngOnInit() {
+    this.products = await this.productService.getProducts();
   }
 
 }

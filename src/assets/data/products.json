@@ -1,16 +1,35 @@
 [
   {
     "id": 1,
-    "nombre": "Portátil Dell",
+    "vendedor": "Zoe Fashion",
+    "nombre": "Pantalón Denim Clásico",
+    "descripcion": "Pantalón vaquero de corte recto, tejido 100% algodón. Ideal para el día a día.",
+    "categoria": "Pantalones",
     "unidades": 12,
-    "precio": 1200,
-    "foto": "assets/images/hamster5.jpg"
+    "precio": 39.99,
+    "descuento": 0,
+    "foto": "/assets/images/pantalon.jpg"
   },
   {
     "id": 2,
-    "nombre": "Monitor LG",
+    "vendedor": "Casual Style",
+    "nombre": "Pantalón Casual Slim",
+    "descripcion": "Pantalón slim fit con tejido elástico para mayor comodidad. Disponible en varios colores.",
+    "categoria": "Pantalones",
     "unidades": 8,
-    "precio": 299,
-    "foto": "assets/images/images.jpg"
+    "precio": 45.50,
+    "descuento": 10,
+    "foto": "/assets/images/pantalon1.jpg"
+  },
+  {
+    "id": 3,
+    "vendedor": "Lovely Threads",
+    "nombre": "Lote Ropa Temporada",
+    "descripcion": "Pack de prendas de temporada seleccionadas. Incluye camisetas, blusas y accesorios.",
+    "categoria": "Lotes",
+    "unidades": 20,
+    "precio": 89.00,
+    "descuento": 15,
+    "foto": "/assets/images/ropa.jpg"
   }
 ]

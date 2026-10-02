@@ -14,20 +14,28 @@
     <ion-card-content>
       Empresa especializada en soluciones basadas en Angular, Ionic y Node.js.
 
-      <p>
-        Distancia a nuestras oficinas:
-        {{ distancia }} km
-      </p>
+      @if (distancia !== null) {
+        <p style="margin-top: 12px;">
+          📍 Distancia a nuestras oficinas:
+          <strong>{{ distancia }} km</strong>
+        </p>
+      }
     </ion-card-content>
   </ion-card>
 
   <ion-button expand="block" (click)="obtenerPosicion()" [disabled]="cargando">
-    <ion-spinner *ngIf="cargando" name="crescent"></ion-spinner>
-    <span *ngIf="!cargando">Obtener mi posición</span>
+    @if (cargando) {
+      <ion-spinner name="crescent"></ion-spinner>
+      &nbsp;Obteniendo ubicación...
+    } @else {
+      Obtener mi posición
+    }
   </ion-button>
 
-  <div *ngIf="error" style="color: red; margin-top: 10px; text-align: center;">
-    {{ error }}
-  </div>
+  @if (error) {
+    <div style="color: red; margin-top: 10px; text-align: center;">
+      ⚠️ {{ error }}
+    </div>
+  }
 
 </ion-content>

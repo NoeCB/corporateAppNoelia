@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { CommonModule, DecimalPipe } from '@angular/common';
 import {
   IonHeader,
   IonToolbar,
@@ -9,9 +9,11 @@ import {
   IonContent,
   IonGrid,
   IonRow,
-  IonCol
+  IonCol,
+  IonBadge
 } from '@ionic/angular';
 import { ProductsService } from '../../services/products.service';
+import { Product } from '../../models/product.interface';
 
 @Component({
   standalone: true,
@@ -20,19 +22,28 @@ import { ProductsService } from '../../services/products.service';
   styleUrls: ['./productos.page.scss'],
   imports: [
     CommonModule,
+    DecimalPipe,
     IonHeader, IonToolbar, IonTitle,
     IonButtons, IonBackButton,
-    IonContent, IonGrid, IonRow, IonCol
+    IonContent, IonGrid, IonRow, IonCol,
+    IonBadge
   ]
 })
 export class ProductosPage implements OnInit {
 
-  products: any[] = [];
+  products: Product[] = [];
 
-  constructor(private productService: ProductsService) {}
+  constructor(private productService: ProductsService, private cdr: ChangeDetectorRef) {}
 
   async ngOnInit() {
-    this.products = await this.productService.getProducts();
+    try {
+      this.products = await this.productService.getProducts();
+      console.log('Productos recibidos:', this.products);
+      this.cdr.detectChanges();
+    } catch (error) {
+      console.error('Error al cargar productos:', error);
+      this.cdr.detectChanges();
+    }
   }
 
 }

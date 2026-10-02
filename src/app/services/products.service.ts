@@ -7,9 +7,9 @@ import { Product } from '../models/product.interface';
 export class ProductsService {
 
   async getProducts(): Promise<Product[]> {
-    const response = await fetch('assets/data/products.json');
-    const products = await response.json();
-    return products;
+    const response = await fetch('/assets/data/products.json');
+    const data = await response.json();
+    return data as Product[];
   }
 
 }

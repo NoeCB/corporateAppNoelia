@@ -9,22 +9,56 @@
 
 <ion-content class="ion-padding">
   <ion-grid>
-    <ion-row class="header" style="font-weight: bold; border-bottom: 2px solid #ccc;">
-      <ion-col>ID</ion-col>
-      <ion-col>Nombre</ion-col>
-      <ion-col>Unidades</ion-col>
-      <ion-col>Precio</ion-col>
-      <ion-col>Foto</ion-col>
+    <!-- Cabecera de la tabla -->
+    <ion-row style="font-weight: bold; border-bottom: 2px solid #ccc; background: #f5f5f5;">
+      <ion-col size="1">ID</ion-col>
+      <ion-col size="1">Foto</ion-col>
+      <ion-col size="2">Nombre</ion-col>
+      <ion-col size="2">Descripción</ion-col>
+      <ion-col size="1">Categoría</ion-col>
+      <ion-col size="1">Vendedor</ion-col>
+      <ion-col size="1">Uds.</ion-col>
+      <ion-col size="2">Precio</ion-col>
     </ion-row>
 
-    <ion-row *ngFor="let product of products" style="align-items: center; border-bottom: 1px solid #eee;">
-      <ion-col>{{ product.id }}</ion-col>
-      <ion-col>{{ product.nombre }}</ion-col>
-      <ion-col>{{ product.unidades }}</ion-col>
-      <ion-col>{{ product.precio }} €</ion-col>
-      <ion-col>
-        <img [src]="product.foto" width="80" alt="{{ product.nombre }}">
-      </ion-col>
-    </ion-row>
+    <!-- Filas de datos con sintaxis moderna @for -->
+    @for (product of products; track product.id) {
+      <ion-row style="align-items: center; border-bottom: 1px solid #eee;">
+        <ion-col size="1">{{ product.id }}</ion-col>
+        <ion-col size="1">
+          <img
+            [src]="product.foto"
+            [alt]="product.nombre"
+            style="width: 48px; height: 48px; object-fit: cover; border-radius: 6px;"
+          />
+        </ion-col>
+        <ion-col size="2" style="font-weight: 500;">{{ product.nombre }}</ion-col>
+        <ion-col size="2" style="font-size: 0.82em; color: #555;">{{ product.descripcion }}</ion-col>
+        <ion-col size="1">
+          <ion-badge color="medium" style="font-size: 0.75em;">{{ product.categoria }}</ion-badge>
+        </ion-col>
+        <ion-col size="1" style="font-size: 0.85em;">{{ product.vendedor }}</ion-col>
+        <ion-col size="1">{{ product.unidades }}</ion-col>
+        <ion-col size="2">
+          @if (product.descuento > 0) {
+            <span style="text-decoration: line-through; color: #999; font-size: 0.85em;">
+              {{ product.precio | number:'1.2-2' }} €
+            </span><br/>
+            <strong style="color: #e63946;">
+              {{ (product.precio * (1 - product.descuento / 100)) | number:'1.2-2' }} €
+            </strong>
+            <ion-badge color="danger" style="margin-left: 4px; font-size: 0.7em;">-{{ product.descuento }}%</ion-badge>
+          } @else {
+            {{ product.precio | number:'1.2-2' }} €
+          }
+        </ion-col>
+      </ion-row>
+    } @empty {
+      <ion-row>
+        <ion-col style="text-align: center; padding: 16px; color: #888;">
+          No hay productos disponibles.
+        </ion-col>
+      </ion-row>
+    }
   </ion-grid>
 </ion-content>
